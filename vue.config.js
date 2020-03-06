@@ -1,5 +1,5 @@
 module.exports = {
-	configureWebpack: {
+    configureWebpack: {
 		devServer: {
 			port: 8080,
       open: true,
@@ -8,5 +8,23 @@ module.exports = {
 
       }
 		}
-	}
+	},
+
+    css: {
+      loaderOptions: {
+        stylus: {
+          'resolve url': true,
+          'import': [
+            './src/theme'
+          ]
+        }
+      }
+    },
+
+    pluginOptions: {
+      'cube-ui': {
+        postCompile: true,
+        theme: true
+      }
+    }
 };
