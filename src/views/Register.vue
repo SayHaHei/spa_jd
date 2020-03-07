@@ -73,9 +73,9 @@ export default {
 		submitHandler(e) {
 			e.preventDefault();//阻止浏览器默认事件
 			this.$http.get("/api/register", { params: this.model }).then(res => {
-        console.log(res.data.success, res.data.message);
+        console.log(res.success, res.message);
       }).catch(err => {
-        console.log(err.data.success, err.data.message);
+        console.log(err);
       });
 		}
 	}
