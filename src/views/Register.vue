@@ -1,5 +1,6 @@
 <template>
 	<div>
+    <img src="https://file.xdclass.net/video/2020/%E9%9D%A2%E8%AF%95%E4%B8%93%E9%A2%98/%E9%9D%A2%E8%AF%95%E4%B8%93%E9%A2%98%E7%AC%AC%E4%B8%80%E5%AD%A3banner.png" alt="" class="headerImg">
 		<cube-form
 			:model="model"
 			:schema="schema"
@@ -70,7 +71,7 @@ export default {
 	},
 	methods: {
 		submitHandler(e) {
-			e.preventDefault();
+			e.preventDefault();//阻止浏览器默认事件
 			this.$http.get("/api/register", { params: this.model }).then(res => {
         console.log(res.data.success, res.data.message);
       }).catch(err => {
@@ -81,4 +82,8 @@ export default {
 };
 </script>
 
-<style lang="stylus" scoped></style>
+<style lang="stylus" scoped>
+  .headerImg
+    height 150px
+    width  100%
+</style>
