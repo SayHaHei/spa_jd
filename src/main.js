@@ -1,14 +1,16 @@
-import Vue from 'vue'
-import './cube-ui'
-import App from './App.vue'
-import router from './router'
-import store from './store'
-import 'amfe-flexible'
+import Vue from "vue";
+import "./cube-ui";
+import App from "./App.vue";
+import router from "./router";
+import store from "./store";
+import axios from "axios";
+import "amfe-flexible";
 
-Vue.config.productionTip = false
-
+Vue.config.productionTip = false;
+/* Vue.prototype.$http设置全局属性，$是为了避免冲突  */
+Vue.prototype.$http = axios;
 new Vue({
-  router,
-  store,
-  render: h => h(App)
-}).$mount('#app')
+	router,
+	store,
+	render: h => h(App)
+}).$mount("#app");

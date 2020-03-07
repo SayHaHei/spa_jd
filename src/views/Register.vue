@@ -57,23 +57,27 @@ export default {
 						},
 						trigger: "blur", //失焦时检测是否符合校验规则
 						messages: {
-							required: "用户名不能为空",
+							required: "用户名不能为空"
 						}
-          },
-          {
-            type:'submit',
-            label:'注册'
-          }
+					},
+					{
+						type: "submit",
+						label: "注册"
+					}
 				]
 			}
 		};
-  },
-  methods:{
-    submitHandler(e){
-      // e.preventDefault();
-      console.log("我注册了");
-    }
-  }
+	},
+	methods: {
+		submitHandler(e) {
+			e.preventDefault();
+			this.$http.get("/api/register", { params: this.model }).then(res => {
+        console.log(res.data.success, res.data.message);
+      }).catch(err => {
+        console.log(err.data.success, err.data.message);
+      });
+		}
+	}
 };
 </script>
 
