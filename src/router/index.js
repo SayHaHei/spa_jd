@@ -7,6 +7,11 @@ Vue.use(VueRouter)
 const routes = [
   {
     path: '/',
+    name: '首页',
+    redirect: '/login'
+  },
+  {
+    path: '/register',
     name: 'register',
     component: Register
   },
