@@ -60,6 +60,28 @@ module.exports = {
 						});
 					}
 				});
+				//首页轮播图的数据接口
+				app.get("/api/banner", (req, res) => {
+					res.json({
+						data: [
+							{
+								url: "https://m.xdclass.net",
+								image:
+									"https://xd-video-pc-img.oss-cn-beijing.aliyuncs.com/xdclass_pro/bannner/1901/learn.png"
+							},
+							{
+								url: "https://m.xdclass.net",
+								image:
+									"https://file.xdclass.net/video/2020/%E9%9D%A2%E8%AF%95%E4%B8%93%E9%A2%98/%E9%9D%A2%E8%AF%95%E4%B8%93%E9%A2%98%E7%AC%AC%E4%B8%80%E5%AD%A3banner.png"
+							},
+							{
+								url: "https://m.xdclass.net",
+								image:
+									"https://xd-video-pc-img.oss-cn-beijing.aliyuncs.com/xdclass_pro/bannner/1901/bat.png"
+							}
+						]
+					});
+				});
 			}
 		}
 	},
