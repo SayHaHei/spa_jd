@@ -86,7 +86,7 @@ export default {
 					/* 设置本地存储 */
           window.localStorage.setItem("token", result.token);
           /* 跳转到首页，防止返回操作用replace */
-          this.$router.replace({path:'/index'})
+          this.$router.replace({path:'/botnav/index'})
 				} else {
 					alert(result.message);
 				}

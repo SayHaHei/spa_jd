@@ -45,7 +45,8 @@ export default {
 	methods: {
 		clickHandler(label) {
 			// if you clicked home tab, then print 'Home'
-			console.log(label);
+      // console.log(label);
+      
 		},
 		/* 点击与自身不同的其他导航 */
 		changeHandler(label) {
@@ -71,6 +72,7 @@ export default {
 	}
 };
 </script>
+/* scoped限制的意思是当前浏览器访问的路由和scoped样式所在的组件的路由不同 */
 <style lang="stylus" scoped>
 .cube-tab-bar.botnav
     position  fixed
