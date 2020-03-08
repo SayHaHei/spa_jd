@@ -28,6 +28,39 @@ const routes = [
 		path: "/index",
 		name: "index",
 		component: () => import("../views/Index.vue")
+	},
+	{
+		path: "/botnav",
+		name: "botnav",
+		component: () => import("../views/Botnav.vue"),
+		children: [
+      /* 二级嵌套路由path不要再加/ 即/list是错误的，应该用list */
+			{
+				path: "index",
+				name: "index",
+				component: () => import("../views/Index.vue")
+			},
+			{
+				path: "list",
+				name: "list",
+				component: () => import("../views/List.vue")
+			},
+			{
+				path: "search",
+				name: "search",
+				component: () => import("../views/Search.vue")
+			},
+			{
+				path: "car",
+				name: "car",
+				component: () => import("../views/Car.vue")
+			},
+			{
+				path: "mine",
+				name: "mine",
+				component: () => import("../views/Mine.vue")
+			}
+		]
 	}
 ];
 
