@@ -31,7 +31,8 @@ const routes = [
 	},
 	{
 		path: "/botnav",
-		name: "botnav",
+    name: "botnav",
+    redirect:'/botnav/index',
 		component: () => import("../views/Botnav.vue"),
 		children: [
       /* 二级嵌套路由path不要再加/ 即/list是错误的，应该用list */

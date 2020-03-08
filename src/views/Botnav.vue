@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<router-view> </router-view>
+		<router-view class="Router"> </router-view>
 		<cube-tab-bar
 			v-model="selectedLabelDefault"
 			:data="tabs"
@@ -16,6 +16,7 @@
 export default {
 	data() {
 		return {
+			transitionName: "slide-right",
 			selectedLabelDefault: "首页",
 			tabs: [
 				{
@@ -78,6 +79,19 @@ export default {
     z-index 1000
     width 100%
     background #fff
+.Router
+  position absolute
+  width 100%
+  transition all 0.8s ease
+.slide-left-enter,.slide-right-leave-active
+  opacity 0
+  /* 渐进增强和优雅降级 */
+  --webkit-transform translate(100%, 0)
+  transform  translate(100%, 0)
+.slide-left-leave-active,..slide-right-enter
+  opacity 0
+  --webkit-transform translate(-100%, 0)
+  transform translate(-100%, 0)
 </style>
 <style lang="stylus">
 .cube-tab-bar .cube-tab
