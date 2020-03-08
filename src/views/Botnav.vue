@@ -69,7 +69,28 @@ export default {
 					break;
 			}
 		}
-	}
+  },
+  created(){
+    switch (this.$route.path) {
+      case "/botnav/index":
+        this.selectedLabelDefault = "首页";
+        break;
+      case "/botnav/list":
+        this.selectedLabelDefault = "分类";
+        break;
+      case "/botnav/search":
+        this.selectedLabelDefault = "搜索";
+        break;
+      case "/botnav/search":
+        this.selectedLabelDefault = "购物车";
+        break;
+      case "/botnav/search":
+        this.selectedLabelDefault = "我的";
+        break;
+      default:
+        break;
+    }
+  }
 };
 </script>
 /* scoped限制的意思是当前浏览器访问的路由和scoped样式所在的组件的路由不同 */

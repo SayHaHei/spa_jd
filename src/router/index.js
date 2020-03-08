@@ -31,11 +31,11 @@ const routes = [
 	},
 	{
 		path: "/botnav",
-    name: "botnav",
-    redirect:'/botnav/index',
+		name: "botnav",
+		redirect: "/botnav/index",
 		component: () => import("../views/Botnav.vue"),
 		children: [
-      /* 二级嵌套路由path不要再加/ 即/list是错误的，应该用list */
+			/* 二级嵌套路由path不要再加/ 即/list是错误的，应该用list */
 			{
 				path: "index",
 				name: "index",
@@ -54,11 +54,17 @@ const routes = [
 			{
 				path: "car",
 				name: "car",
+				meta: {
+					requiredAuth: true //当为真时，我们认为这个路由要有登录权限
+				},
 				component: () => import("../views/Car.vue")
 			},
 			{
 				path: "mine",
 				name: "mine",
+				meta: {
+					requiredAuth: true //当为真时，我们认为这个路由要有登录权限
+				},
 				component: () => import("../views/Mine.vue")
 			}
 		]

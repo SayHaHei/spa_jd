@@ -84,9 +84,14 @@ export default {
 					/* 设置token */
 					this.$store.commit("setToken", result.token);
 					/* 设置本地存储 */
-          window.localStorage.setItem("token", result.token);
-          /* 跳转到首页，防止返回操作用replace */
-          this.$router.replace({path:'/botnav/index'})
+					window.localStorage.setItem("token", result.token);
+					/* 跳转到首页，防止返回操作用replace */
+					//判断路由是否带参，带参就去到重定向参数地址，否则就去首页
+					if (this.$route.query.redirect) {
+						this.$router.replace({ path: this.$route.query.redirect });
+					} else {
+						this.$router.replace({ path: "/botnav/index" });
+					}
 				} else {
 					alert(result.message);
 				}
