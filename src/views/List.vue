@@ -16,10 +16,26 @@
 			<ul>
 				<li v-for="(tag, index) in tags" :key="index">
 					<img :src="tag.image" alt="" />
-					<p>{{ tag.label }} <i class="cubeic-add" @click="addtocart($event, tag)"></i> </p>
+					<p>
+						{{ tag.label }}
+						<i class="cubeic-add" @click="addtocart($event, tag)"></i>
+					</p>
 				</li>
 			</ul>
 		</cube-scroll>
+		<div class="ball-wrap">
+			<transition
+				@before-enter="beforeEnter"
+				@enter="enter"
+				@afterEnter="afterEnter"
+			>
+				<div class="ball" v-if="ball.show">
+					<div class="inner">
+						<i class="cubeic-add"></i>
+					</div>
+				</div>
+			</transition>
+		</div>
 	</div>
 </template>
 
@@ -27,6 +43,10 @@
 export default {
 	data() {
 		return {
+			ball: {
+				show: false,
+				el: ""
+			},
 			tags: [],
 			tabslabel: [
 				{
@@ -101,9 +121,40 @@ export default {
 			});
 			this.getclassify(index);
 		},
-    /* 添加商品到购物车 */
-    addtocart(e, tag){
-      this.$store.commit("tocart", tag);
+		/* 添加商品到购物车 */
+		addtocart(e, tag) {
+			this.$store.commit("tocart", tag);
+			this.ball.show = true;
+			//获取点击的元素
+			this.ball.el = e.target;
+		},
+		beforeEnter(el) {
+			//让小球移动到点击的位置
+			//获取点击位置
+			const dom = this.ball.el;
+      const rect = dom.getBoundingClientRect(); //获取点击的dom的位置
+      const x = rect.left - window.innerWidth * 0.7;
+      const y = -(window.innerHeight - rect.top);
+      el.style.display = "block";
+      el.style.transform = `translate3d(0,${y}px, 0)`;
+      const inner = el.querySelector('.inner');
+      inner.style.transform = `translate3d(${x}px, 0, 0)`;
+
+		},
+		enter(el, done) {
+      //触发重绘
+      document.body.offsetHeight;
+      //移动回原点，就是购物车的位置
+      el.style.transform = `translate3d(0,0,0)`;
+      const inner = el.querySelector('.inner');
+      inner.style.transform = `translate3d(0,0,0)`;
+      //过渡完成后执行的事件
+      el.addEventListener('transitionend', done);
+    },
+		afterEnter(el) {
+      //结束隐藏小球
+      this.ball.show = false;
+      el.style.display = 'none';
     }
 	},
 	created() {
@@ -111,18 +162,30 @@ export default {
 		this.getclassify(0);
 	},
 	mounted() {
-    /* 设置滚动盒子高度 */
-    /* 各种高度？ */
+		/* 设置滚动盒子高度 */
+		/* 各种高度？ */
 		const leftpanels = document.querySelector(".leftpanels");
-    const rightpanels = document.querySelector(".rightpanels");
-    const bodyheight = document.documentElement.clientHeight;
-    leftpanels.style.height = bodyheight - 57 + "px";
-    rightpanels.style.height = bodyheight - 57 + "px";
+		const rightpanels = document.querySelector(".rightpanels");
+		const bodyheight = document.documentElement.clientHeight;
+		leftpanels.style.height = bodyheight - 57 + "px";
+		rightpanels.style.height = bodyheight - 57 + "px";
 	}
 };
 </script>
 
 <style lang="stylus" scoped>
+.ball-wrap
+  .ball
+      position fixed
+      left 70%
+      bottom 18px
+      z-index 1003
+      color red
+      transition all 1s cubic-bezier(0.49, -0.29, 0.75, 0.41)
+      .inner
+        width 12px
+        height 12px
+        transition all 1s linear
 .panelsbox
     display flex
     .leftpanels
