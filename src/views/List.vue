@@ -16,7 +16,7 @@
 			<ul>
 				<li v-for="(tag, index) in tags" :key="index">
 					<img :src="tag.image" alt="" />
-					<p>{{ tag.label }}</p>
+					<p>{{ tag.label }} <i class="cubeic-add" @click="addtocart($event, tag)"></i> </p>
 				</li>
 			</ul>
 		</cube-scroll>
@@ -100,7 +100,11 @@ export default {
 				}
 			});
 			this.getclassify(index);
-		}
+		},
+    /* 添加商品到购物车 */
+    addtocart(e, tag){
+      this.$store.commit("tocart", tag);
+    }
 	},
 	created() {
 		/* 获取默认的分类数据，index初始为0 */
@@ -146,4 +150,6 @@ export default {
                 img
                     width 80px
                     height  80px
+                .cube-icon-add
+                  font-size 18px
 </style>

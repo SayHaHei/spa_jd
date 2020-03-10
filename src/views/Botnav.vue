@@ -9,10 +9,14 @@
 			class="botnav"
 		>
 		</cube-tab-bar>
+		<span class="countsum">
+			{{ countsum }}
+		</span>
 	</div>
 </template>
 
 <script>
+import { mapGetters } from "vuex";
 export default {
 	data() {
 		return {
@@ -41,12 +45,16 @@ export default {
 				}
 			]
 		};
-	},
+  },
+  computed:{
+    ...mapGetters({
+      countsum:'countsum'
+    })
+  },
 	methods: {
 		clickHandler(label) {
 			// if you clicked home tab, then print 'Home'
-      // console.log(label);
-      
+			// console.log(label);
 		},
 		/* 点击与自身不同的其他导航 */
 		changeHandler(label) {
@@ -69,28 +77,28 @@ export default {
 					break;
 			}
 		}
-  },
-  created(){
-    switch (this.$route.path) {
-      case "/botnav/index":
-        this.selectedLabelDefault = "首页";
-        break;
-      case "/botnav/list":
-        this.selectedLabelDefault = "分类";
-        break;
-      case "/botnav/search":
-        this.selectedLabelDefault = "搜索";
-        break;
-      case "/botnav/search":
-        this.selectedLabelDefault = "购物车";
-        break;
-      case "/botnav/search":
-        this.selectedLabelDefault = "我的";
-        break;
-      default:
-        break;
-    }
-  }
+	},
+	created() {
+		switch (this.$route.path) {
+			case "/botnav/index":
+				this.selectedLabelDefault = "首页";
+				break;
+			case "/botnav/list":
+				this.selectedLabelDefault = "分类";
+				break;
+			case "/botnav/search":
+				this.selectedLabelDefault = "搜索";
+				break;
+			case "/botnav/search":
+				this.selectedLabelDefault = "购物车";
+				break;
+			case "/botnav/search":
+				this.selectedLabelDefault = "我的";
+				break;
+			default:
+				break;
+		}
+	}
 };
 </script>
 /* scoped限制的意思是当前浏览器访问的路由和scoped样式所在的组件的路由不同 */
@@ -124,4 +132,16 @@ export default {
     font-weight bold
   i
     font-size 18px
+.countsum
+  position fixed
+  bottom 33px
+  right 23%
+  z-index 1001
+  width 18px
+  height 18px
+  border-radius 50%
+  line-height 18px
+  font-size 14px
+  background red
+  color #fff
 </style>
